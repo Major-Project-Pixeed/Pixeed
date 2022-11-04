@@ -36,3 +36,4 @@ public class BasicAdjust {
                 activeImageView.setEffect(colorAdjust);
             }
         });
+}
