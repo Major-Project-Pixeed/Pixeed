@@ -36,4 +36,20 @@ public class BasicAdjust {
                 activeImageView.setEffect(colorAdjust);
             }
         });
+        hue.valueProperty().addListener(new InvalidationListener() {
+            @Override
+            public void invalidated(Observable observable) {
+                colorAdjust.setHue((hue.getValue() - 50) / 50);
+                activeImageView.setEffect(colorAdjust);
+            }
+        });
+        saturation.valueProperty().addListener(new InvalidationListener() {
+            @Override
+            public void invalidated(Observable observable) {
+                colorAdjust.setSaturation((saturation.getValue() - 50) / 50);
+                activeImageView.setEffect(colorAdjust);
+            }
+        });
+    }
+
 }
