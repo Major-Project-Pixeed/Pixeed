@@ -39,5 +39,27 @@ public class Filters {
         anchorPane.getChildren().add(anchorPane1);
     }
 
-   
+    protected void setSunshine1Filter(AnchorPane anchorPane) throws FileNotFoundException {
+        Image image = new Image(new FileInputStream(new File("src/main/resources/com/example/softablitz/icons/sunshine1.png")));
+        ImageView imageView = new ImageView(image);
+        AnchorPane anchorPane1 = new AnchorPane();
+        anchorPane1.getChildren().add(imageView);
+        anchorPane.getChildren().add(anchorPane1);
+    }
+
+    protected void setSunshine2Filter(AnchorPane anchorPane) throws FileNotFoundException {
+        Image image = new Image(new FileInputStream(new File("src/main/resources/com/example/softablitz/icons/sunshine1.png")));
+        ImageView imageView = new ImageView(image);
+        AnchorPane anchorPane1 = new AnchorPane();
+        anchorPane1.getChildren().add(imageView);
+        anchorPane.getChildren().add(anchorPane1);
+    }
+
+    protected void setSmoothFilter(AnchorPane anchorPane) throws FileNotFoundException {
+        Image image = new Image(new FileInputStream(new File("src/main/resources/com/example/softablitz/icons/smooth1.jpg")));
+        ImageView imageView = new ImageView(image);
+        AnchorPane anchorPane1 = new AnchorPane();
+        anchorPane1.getChildren().add(imageView);
+        anchorPane.getChildren().add(anchorPane1);
+    }
 }
