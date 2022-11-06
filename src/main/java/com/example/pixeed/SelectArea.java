@@ -107,6 +107,81 @@ public class SelectArea {
         });
 
     }
+    protected static void makeLasso(AnchorPane imageViewPane, ImageView imageView, File file) throws FileNotFoundException {
+        imageViewPane.getChildren().remove(polygon);
+        imageViewPane.getChildren().remove(rect);
+        imageViewPane.getChildren().remove(ellipse);
+        polygon = new Polygon();
+        polygon.setStroke(Color.BLACK);
+        polygon.setFill(Color.TRANSPARENT);
+        polygon.getStrokeDashArray().addAll(5.0, 5.0);
+        imageViewPane.getChildren().add(polygon);
+        imageView.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent e) {
+                polygon.getPoints().clear();
+                polygon.getPoints().add(e.getSceneX());
+                polygon.getPoints().add(e.getSceneY());
+            }
+        });
+        imageView.setOnMouseDragged(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent e) {
+                mouseDownX = e.getSceneX();
+                mouseDownY = e.getSceneY();
+                polygon.getPoints().add(mouseDownX);
+                polygon.getPoints().add(mouseDownY);
+            }
+        });
+        imageView.setOnMouseReleased(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent e) {
+                try {
+                    makeMask(imageView, file);
+                } catch (FileNotFoundException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
+
+ protected static void makeEllipse(AnchorPane imageViewPane, ImageView imageView) {
+        imageViewPane.getChildren().remove(polygon);
+        imageViewPane.getChildren().remove(rect);
+        imageViewPane.getChildren().remove(ellipse);
+        ellipse = new Ellipse();
+        ellipse.setStroke(Color.BLACK);
+        ellipse.setFill(Color.TRANSPARENT);
+        ellipse.getStrokeDashArray().addAll(5.0, 5.0);
+        imageViewPane.getChildren().add(ellipse);
+        imageView.setOnMousePressed(e -> {
+            mouseDownX = e.getSceneX();
+            mouseDownY = e.getSceneY();
+            ellipse.setCenterX(mouseDownX);
+            ellipse.setCenterY(mouseDownY);
+            ellipse.setRadiusX(0.0);
+            ellipse.setRadiusY(0.0);
+        });
+        imageView.setOnMouseDragged(e -> {
+            ellipse.setCenterX(Math.min(e.getSceneX(), mouseDownX));
+            ellipse.setCenterY(Math.min(e.getSceneY(), mouseDownY));
+            ellipse.setRadiusX(Math.abs(e.getSceneX() - mouseDownX));
+            ellipse.setRadiusY(Math.abs(e.getSceneY() - mouseDownY));
+        });
+        imageView.setOnMouseReleased(e -> {
+            mask = new Mat(matrix.rows(), matrix.cols(), CV_8UC4, new Scalar(0, 0, 0, 0));
+            double ratio = Math.max(ratio2, ratio1);
+            Point point = new Point(ellipse.getCenterX() * ratio, ellipse.getCenterY() * ratio);
+            Size size = new Size(ellipse.getRadiusX() * ratio, ellipse.getRadiusY() * ratio);
+            ArrayList<Mat> bgra = new ArrayList<>(4);
+            split(mask, bgra);
+            ellipse(bgra.get(0), point, size, 0, 0, 360, new Scalar(255), -1, LINE_AA);
+            ellipse(bgra.get(1), point, size, 0, 0, 360, new Scalar(255), -1, LINE_AA);
+            ellipse(bgra.get(2), point, size, 0, 0, 360, new Scalar(255), -1, LINE_AA);
+            ellipse(bgra.get(3), point, size, 0, 0, 360, new Scalar(255), -1, LINE_AA);
+            merge(bgra, mask);
+        });
+    }
+
 
     
 
