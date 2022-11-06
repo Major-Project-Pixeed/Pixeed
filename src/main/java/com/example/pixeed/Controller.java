@@ -50,6 +50,25 @@ public class Controller {
 
     }
 
+ @FXML
+    protected void handleZoom(ImageView imageView) {
+        imageView.maxWidth(100);
+        imageView.maxHeight(100);
+        imageView.setOnScroll(new EventHandler<ScrollEvent>() {
+            @Override
+            public void handle(ScrollEvent event) {
+                double zoomFactor = 1.05;
+                double deltaY = event.getDeltaY();
+                if (deltaY < 0) {
+                    zoomFactor = 0.95;
+                }
+                double finalZoomFactor = zoomFactor;
+                imageView.setScaleX(imageView.getScaleX() * finalZoomFactor);
+                imageView.setScaleY(imageView.getScaleY() * finalZoomFactor);
+            }
+        });
+    }
+    
 @FXML
     private void ADDBUTTONPRESSED() {
         Text text = new Text();
