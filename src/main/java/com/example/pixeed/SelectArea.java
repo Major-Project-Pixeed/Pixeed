@@ -217,19 +217,19 @@ public class SelectArea {
         // and shape will have fully opaque region
     }
 
-    protected static void crop(File file, ImageView imageView, AnchorPane imageViewPane) throws FileNotFoundException {
-        result = new Mat();
-        // now to crop image just make & operator bw mask and matrix
-        // eg. some matrix pixel    14  14  25 255  ,   16  16  18  255
-        // eg. some mask pixel       0   0  0   0   ,  255  255 255 255
-        // eq. matrix & mask    =    0   0  0   0   ,  16   16   18  255
-        // eq.                     tranparent region ,  opaque region
-        bitwise_and(matrix, mask, result);
-        showResult(result, imageView);
-        imageViewPane.getChildren().remove(rect);
-        imageViewPane.getChildren().remove(ellipse);
-        imageViewPane.getChildren().remove(polygon);
-    }
+        protected static void crop(File file, ImageView imageView, AnchorPane imageViewPane) throws FileNotFoundException {
+            result = new Mat();
+            // now to crop image just make & operator bw mask and matrix
+            // eg. some matrix pixel    14  14  25 255  ,   16  16  18  255
+            // eg. some mask pixel       0   0  0   0   ,  255  255 255 255
+            // eq. matrix & mask    =    0   0  0   0   ,  16   16   18  255
+            // eq.                     tranparent region ,  opaque region
+            bitwise_and(matrix, mask, result);
+            showResult(result, imageView);
+            imageViewPane.getChildren().remove(rect);
+            imageViewPane.getChildren().remove(ellipse);
+            imageViewPane.getChildren().remove(polygon);
+        }
 
     protected static ImageView imageView;
 
