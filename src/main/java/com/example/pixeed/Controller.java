@@ -100,6 +100,39 @@ public class Controller {
         });
     }
     
+@FXML
+    protected void brushButtonPressed() {
+        adjustPane.setVisible(false);
+        TEXTPANE.setVisible(false);
+        textButton.setVisible(true);
+        adjustButton.setVisible(true);
+
+        if (activeImageView == null) {
+            return;
+        }
+        specialEffectMenu.setVisible(false);
+        areaSelectionMenu.setVisible(false);
+        brushPane.setVisible(true);
+        brushButton.setVisible(false);
+        GraphicsContext g;
+        Canvas canvas = null;
+        canvas = new Canvas(imageViewPane.getWidth(), imageViewPane.getHeight());
+        g = canvas.getGraphicsContext2D();
+        g.drawImage(activeImageView.getImage(), activeImageView.getFitWidth(), activeImageView.getFitHeight());
+        canvas.setOnMouseDragged(e -> {
+            double size = brushSize.getValue();
+            double x = e.getX() - size / 2;
+            double y = e.getY() - size / 2;
+            if (eraserToggleButton.isSelected()) {
+                    g.clearRect(x, y, size, size);
+            } else {
+                g.setFill(brushColorPicker.getValue());
+                g.fillOval(x, y, size, size);
+            }
+        });
+        imageViewPane.getChildren().add(canvas);
+    }
+
  @FXML
     protected void SETRAIN2() throws FileNotFoundException {
         Filters filters = new Filters();
