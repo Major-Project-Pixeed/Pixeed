@@ -25,5 +25,27 @@ public class SideBlur {
 
     }
 
+protected static void horizonrolSideBlur(AnchorPane imageViewPane, ImageView imageView) throws FileNotFoundException {
+
+
+
+
+        Image image = imageView.getImage();
+        double x = imageView.getLayoutX();
+        double y = imageView.getLayoutY();
+        double width = image.getWidth();
+        double height = image.getHeight();
+        GaussianBlur gaussianBlur = new GaussianBlur();
+        imageView.setEffect(gaussianBlur);
+        Rectangle2D rectangle2D = new Rectangle2D(width * 0.2, 0, width * 0.6, height);
+        imageView.setViewport(rectangle2D);
+        ImageView imageView1 = new ImageView(image);
+        imageViewPane.getChildren().add(imageView1);
+        imageView1.setLayoutX(x);
+        imageView1.setLayoutY(y + (0.1 * imageView.getFitHeight()));
+        imageView1.setFitWidth(imageView.getFitWidth());
+        imageView1.setFitHeight(0.8 * imageView.getFitHeight());
+    }
+
     
 }
