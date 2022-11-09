@@ -18,6 +18,8 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.MenuButton;
 
+import java.io.IOException;
+
 public class Controller {
  @FXML
     private AnchorPane menuBarPane, imageViewPane;
@@ -156,6 +158,12 @@ public class Controller {
         Filters filters = new Filters();
         filters.setSunshine2Filter(imageViewPane);
     }
+    @FXML
+    protected void UPSCALEIMAGE() throws IOException {
+        UpScaleImage scale = new UpScaleImage();
+        scale.resize(file.getAbsolutePath(), "D:\\upscaleOutput.jpg", upscaleSlider.getValue());
+    }
+
 
     @FXML
     protected void onHelloButtonClick() {
