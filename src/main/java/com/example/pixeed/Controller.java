@@ -196,5 +196,22 @@ public class Controller {
                 RedEyeCorrection.showResult(tmpimage[0], activeImageView);
             }
         });
+
+
+    }
+
+ @FXML
+    private JFXSlider smoothingSlider;
+
+    @FXML
+    protected void smoothingButtonPressed() {
+        smoothingSlider.setDisable(false);
+        System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+        smoothingSlider.setOnMouseDragged(e -> {
+            Mat image = Imgcodecs.imread(file.getAbsolutePath(), Imgcodecs.IMREAD_COLOR);
+            Mat dst = image.clone();
+            Imgproc.bilateralFilter(image, dst, (int) smoothingSlider.getValue(), smoothingSlider.getValue() * 2, smoothingSlider.getValue() / 2);
+            RedEyeCorrection.showResult(dst, activeImageView);
+        });
     }
 }
