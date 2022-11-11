@@ -18,6 +18,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.MenuButton;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class Controller {
@@ -206,6 +207,66 @@ public class Controller {
         });
 
 
+    }
+    @FXML
+    protected void rectangleSelection() throws FileNotFoundException {
+        SelectArea selectArea = new SelectArea(file, activeImageView);
+        selectArea.makeRectangle(imageViewPane, activeImageView, file);
+    }
+
+    @FXML
+    protected void ellipseSelection() throws FileNotFoundException {
+        SelectArea selectArea = new SelectArea(file, activeImageView);
+        selectArea.makeEllipse(imageViewPane, activeImageView);
+    }
+
+    @FXML
+    protected void lassoSelection() throws FileNotFoundException {
+        SelectArea selectArea = new SelectArea(file, activeImageView);
+        selectArea.makeLasso(imageViewPane, activeImageView, file);
+    }
+
+    @FXML
+    protected void cropButtonPressed() throws FileNotFoundException {
+        SelectArea selectArea = new SelectArea(file, activeImageView);
+        selectArea.crop(file, activeImageView, imageViewPane);
+    }
+    @FXML
+    void SETFRAME1(ActionEvent event) throws FileNotFoundException {
+        ImageFrame.SETFRAME1(imageViewPane);
+        stk.push(imageViewPane.getChildren());
+    }
+
+    @FXML
+    void SETFRAME2(ActionEvent event) throws FileNotFoundException {
+        ImageFrame.SETFRAME2(imageViewPane);
+        stk.push(imageViewPane.getChildren());
+    }
+
+
+    @FXML
+    void SETFRAME3(ActionEvent event) throws FileNotFoundException {
+        ImageFrame.SETFRAME3(imageViewPane);
+    }
+
+
+    @FXML
+    void SETFRAME4(ActionEvent event) throws FileNotFoundException {
+        ImageFrame.SETFRAME4(imageViewPane);
+    }
+
+
+    @FXML
+    void SETFRAME5(ActionEvent event) throws FileNotFoundException {
+        ImageFrame.SETFRAME5(imageViewPane);
+        stk.push(imageViewPane.getChildren());
+    }
+
+    @FXML
+    void SETFRAME6(ActionEvent event) throws FileNotFoundException {
+
+        ImageFrame.SETFRAME6(imageViewPane);
+        stk.push(imageViewPane.getChildren());
     }
 
  @FXML
