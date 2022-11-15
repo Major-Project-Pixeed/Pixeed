@@ -1,4 +1,4 @@
-package com.example.pixeed;
+package com.example.softablitz;
 
 import javafx.event.EventHandler;
 import javafx.scene.Cursor;
@@ -34,7 +34,7 @@ public class ImageFrame {
     }
 
     protected static void addResizeButton(AnchorPane anchorPane, ImageView imageView) throws FileNotFoundException {
-        Button button = new Button();
+        javafx.scene.control.Button button = new Button();
         ImageView buttonImage = new ImageView(new Image(new FileInputStream
                 ("src/main/resources/com/example/softablitz/icons/resizeIcon.png")));
         ColorAdjust colorAdjust = new ColorAdjust();
@@ -76,7 +76,119 @@ public class ImageFrame {
         });
     }
 
+    public static double centerFrameImage(ImageView imageView, AnchorPane anchorPane) {
+        Image image = imageView.getImage();
+        double ratio = Math.min((double) anchorPane.getHeight() / image.getHeight(), (double) anchorPane.getWidth() / image.getWidth());
+        imageView.setFitWidth(image.getWidth() * ratio);
+        imageView.setFitHeight(image.getHeight() * ratio);
+        double wid = imageView.getFitWidth();
+        double hig = imageView.getFitHeight();
+        int padding = 0;
+        imageView.setLayoutX((anchorPane.getWidth() - wid) / 2 - padding);
+        imageView.setLayoutY((anchorPane.getHeight() - hig) / 2 - padding);
+        anchorPane.getChildren().add(imageView);
+        return ratio;
+    }
 
+    protected static void addCollageFrame(AnchorPane imageViewPane, AnchorPane anchorPane, double startx, double starty, double width, double height) throws FileNotFoundException {
+        Image image = new Image(new FileInputStream(new File("src/main/resources/com/example/softablitz/icons/selection.jpg")));
+        ImageView imageView = new ImageView(image);
+        imageView.setFitWidth(width);
+        imageView.setFitHeight(height);
+        anchorPane.setLayoutX(startx);
+        anchorPane.setLayoutY(starty);
+        anchorPane.setPrefHeight(imageView.getFitHeight());
+        anchorPane.setPrefWidth(imageView.getFitWidth());
+        anchorPane.getChildren().add(imageView);
+        imageViewPane.getChildren().add(anchorPane);
+        imageView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                try {
+                    openFile(imageView);
+                    imageView.toBack();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        addResizeButton(anchorPane, imageView);
+    }
+
+    protected static void SETFRAME1(AnchorPane imageViewPane) throws FileNotFoundException {
+        imageViewPane.getChildren().clear();
+        Image image = new Image(new FileInputStream(new File("src/main/resources/com/example/softablitz/icons/frame1.jpg")));
+        ImageView imageView = new ImageView(image);
+        double ratio = centerFrameImage(imageView, imageViewPane);
+        AnchorPane anchorPane = new AnchorPane();
+        addCollageFrame(imageViewPane, anchorPane, ratio * 1770 + imageView.getLayoutX(), 1355 * ratio + imageView.getLayoutY(), 745 * ratio, 1090 * ratio);
+    }
+
+
+    protected static void SETFRAME2(AnchorPane imageViewPane) throws FileNotFoundException {
+        imageViewPane.getChildren().clear();
+        Image image = new Image(new FileInputStream(new File("src/main/resources/com/example/softablitz/icons/frame2.png")));
+        ImageView imageView = new ImageView(image);
+        double ratio = centerFrameImage(imageView, imageViewPane);
+        AnchorPane anchorPane = new AnchorPane();
+        System.out.println(imageView.getLayoutX() + " " + imageView.getLayoutY() + " " + imageView.getFitWidth() + " " + imageView.getFitHeight());
+        System.out.println(ratio * 1770 + " " + 1355 * ratio + " " + 745 * ratio + " " + 1090 * ratio);
+        addCollageFrame(imageViewPane, anchorPane, ratio * 315 + imageView.getLayoutX(), 80 * ratio + imageView.getLayoutY(), 425 * ratio, 595 * ratio);
+
+
+    }
+
+
+    protected static void SETFRAME3(AnchorPane imageViewPane) throws FileNotFoundException {
+        imageViewPane.getChildren().clear();
+        Image image = new Image(new FileInputStream(new File("src/main/resources/com/example/softablitz/icons/frame3.png")));
+        ImageView imageView = new ImageView(image);
+        double ratio = centerFrameImage(imageView, imageViewPane);
+        AnchorPane anchorPane = new AnchorPane();
+        System.out.println(imageView.getLayoutX() + " " + imageView.getLayoutY() + " " + imageView.getFitWidth() + " " + imageView.getFitHeight());
+        System.out.println(ratio * 1770 + " " + 1355 * ratio + " " + 745 * ratio + " " + 1090 * ratio);
+        addCollageFrame(imageViewPane, anchorPane, ratio * 125 + imageView.getLayoutX(), 110 * ratio + imageView.getLayoutY(), 545 * ratio, 350 * ratio);
+
+    }
+
+
+    protected static void SETFRAME4(AnchorPane imageViewPane) throws FileNotFoundException {
+        imageViewPane.getChildren().clear();
+        Image image = new Image(new FileInputStream(new File("src/main/resources/com/example/softablitz/icons/frame4.png")));
+        ImageView imageView = new ImageView(image);
+        double ratio = centerFrameImage(imageView, imageViewPane);
+        AnchorPane anchorPane = new AnchorPane();
+        System.out.println(imageView.getLayoutX() + " " + imageView.getLayoutY() + " " + imageView.getFitWidth() + " " + imageView.getFitHeight());
+        System.out.println(ratio * 1770 + " " + 1355 * ratio + " " + 745 * ratio + " " + 1090 * ratio);
+        addCollageFrame(imageViewPane, anchorPane, ratio * 300 + imageView.getLayoutX(), 330 * ratio + imageView.getLayoutY(), 1320 * ratio, 800 * ratio);
+
+    }
+
+
+    protected static void SETFRAME5(AnchorPane imageViewPane) throws FileNotFoundException {
+        imageViewPane.getChildren().clear();
+        Image image = new Image(new FileInputStream(new File("src/main/resources/com/example/softablitz/icons/frame5.jpg")));
+        ImageView imageView = new ImageView(image);
+        double ratio = centerFrameImage(imageView, imageViewPane);
+        AnchorPane anchorPane = new AnchorPane();
+        System.out.println(imageView.getLayoutX() + " " + imageView.getLayoutY() + " " + imageView.getFitWidth() + " " + imageView.getFitHeight());
+        System.out.println(ratio * 1080 + " " + 605 * ratio + " " + 5055 * ratio + " " + 1925 * ratio);
+        addCollageFrame(imageViewPane, anchorPane, ratio * 1800 + imageView.getLayoutX(), 605 * ratio + imageView.getLayoutY(), 1380 * ratio, 1925 * ratio);
+
+    }
+
+    protected static void SETFRAME6(AnchorPane imageViewPane) throws FileNotFoundException {
+        imageViewPane.getChildren().clear();
+        Image image = new Image(new FileInputStream(new File("src/main/resources/com/example/softablitz/icons/frame6.jpg")));
+        ImageView imageView = new ImageView(image);
+        double ratio = centerFrameImage(imageView, imageViewPane);
+        AnchorPane anchorPane = new AnchorPane();
+        System.out.println(imageView.getLayoutX() + " " + imageView.getLayoutY() + " " + imageView.getFitWidth() + " " + imageView.getFitHeight());
+        System.out.println(ratio * 1770 + " " + 1355 * ratio + " " + 745 * ratio + " " + 1090 * ratio);
+        addCollageFrame(imageViewPane, anchorPane, ratio * 1650 + imageView.getLayoutX(), 945 * ratio + imageView.getLayoutY(), 1130 * ratio, 1865 * ratio);
+        imageViewPane.toFront();
+
+    }
     // frame1 : 1770 1355 , 2515  2445
 // frame3 : 125 110  , 670 460
 // frame4 : 300 330  , 1620 1130
