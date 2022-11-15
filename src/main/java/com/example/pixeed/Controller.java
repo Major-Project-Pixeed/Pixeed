@@ -283,4 +283,14 @@ public class Controller {
             RedEyeCorrection.showResult(dst, activeImageView);
         });
     }
+
+
+    @FXML
+    protected void COMPRESS() throws IOException {
+        Compress compress = new Compress();
+        Image image = activeImageView.getImage();
+        System.out.println(compressQuality.getValue() / 100);
+        compress.compressImage(image, compressQuality.getValue() / 100);
+    }
+
 }
